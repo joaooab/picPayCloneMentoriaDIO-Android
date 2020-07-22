@@ -12,14 +12,34 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="br.com.dio.picpayclone.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_pagar"
+        android:name="br.com.dio.picpayclone.ui.pagar.PagarFragment"
+        android:label="@string/title_pagar"
+        tools:layout="@layout/fragment_pagar" >
+        <action
+            android:id="@+id/action_navigation_pagar_to_placeholder2"
+            app:destination="@id/navigation_transferencia" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="br.com.dio.picpayclone.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="br.com.dio.picpayclone.ui.login.LoginFragment"
+        android:label="@string/title_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/navigation_login"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_navigation_login"
+        app:destination="@id/navigation_login"
+        app:popUpTo="@id/mobile_navigation" />
+    <fragment android:id="@+id/navigation_transferencia" />
 </navigation>
