@@ -54,7 +54,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Log in"
+        android:text="Entrar"
         app:cornerRadius="8dp"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"

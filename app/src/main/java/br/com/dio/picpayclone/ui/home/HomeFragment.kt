@@ -7,16 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import br.com.dio.picpayclone.Componentes
+import br.com.dio.picpayclone.ComponentesViewModel
 import br.com.dio.picpayclone.R
 import br.com.dio.picpayclone.data.Transacao
 import br.com.dio.picpayclone.extension.formatarMoeda
 import br.com.dio.picpayclone.ui.login.LoginViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
+    private val componentesViewModel: ComponentesViewModel by sharedViewModel()
     private val homeViewModel: HomeViewModel by viewModel()
     private val loginViewModel: LoginViewModel by viewModel()
     private val controlador by lazy { findNavController() }
@@ -40,8 +43,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val navView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
-        navView?.visibility = View.VISIBLE
+        componentesViewModel.temComponentes = Componentes(bottomNavigation = true)
         observarSaldo()
         configuraRecyclerView()
     }

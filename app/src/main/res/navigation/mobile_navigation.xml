@@ -26,10 +26,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_ajuste"
         android:name="br.com.dio.picpayclone.ui.ajuste.AjusteFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_ajuste" />
     <fragment
         android:id="@+id/navigation_login"
         android:name="br.com.dio.picpayclone.ui.login.LoginFragment"

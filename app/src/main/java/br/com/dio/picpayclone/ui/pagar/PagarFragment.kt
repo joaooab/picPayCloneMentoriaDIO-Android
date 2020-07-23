@@ -6,13 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import br.com.dio.picpayclone.Componentes
+import br.com.dio.picpayclone.ComponentesViewModel
 import br.com.dio.picpayclone.R
 import br.com.dio.picpayclone.data.Usuario
 import kotlinx.android.synthetic.main.fragment_pagar.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PagarFragment : Fragment() {
 
+    private val componentesViewModel: ComponentesViewModel by sharedViewModel()
     private val pagarViewModel: PagarViewModel by viewModel()
     private val controlador by lazy { findNavController() }
 
@@ -26,6 +30,7 @@ class PagarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        componentesViewModel.temComponentes = Componentes(bottomNavigation = true)
         configuraRecyclerView()
     }
 
