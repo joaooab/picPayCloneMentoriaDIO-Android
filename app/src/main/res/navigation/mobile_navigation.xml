@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="br.com.dio.picpayclone.ui.notifications.NotificationsFragment"
+        android:name="br.com.dio.picpayclone.ui.ajuste.AjusteFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
@@ -49,6 +49,11 @@
         <argument
             android:name="usuario"
             app:argType="br.com.dio.picpayclone.data.Usuario" />
+        <action
+            android:id="@+id/action_navigation_transferencia_to_navigation_pagar"
+            app:destination="@id/navigation_pagar"
+            app:popUpTo="@id/navigation_pagar"
+            app:popUpToInclusive="true" />
     </fragment>
     <action
         android:id="@+id/action_global_navigation_login"

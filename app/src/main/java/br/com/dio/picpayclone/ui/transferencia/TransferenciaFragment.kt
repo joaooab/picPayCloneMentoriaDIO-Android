@@ -7,6 +7,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.dio.picpayclone.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,6 +17,7 @@ class TransferenciaFragment : Fragment() {
 
     private val argumentos by navArgs<TransferenciaFragmentArgs>()
     private val usuario by lazy { argumentos.usuario }
+    private val controlador by lazy { findNavController() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,8 +31,25 @@ class TransferenciaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val navView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
         navView?.visibility = GONE
+        configuraDadosUsuario()
+        configuraRadioGroup()
+        configuraBotaoTransferir()
+    }
+
+    private fun configuraBotaoTransferir() {
+        buttonTransferir.setOnClickListener {
+            val direcao =
+                TransferenciaFragmentDirections.actionNavigationTransferenciaToNavigationPagar()
+            controlador.navigate(direcao)
+        }
+    }
+
+    private fun configuraDadosUsuario() {
         textViewNome.text = usuario.login
         textViewNomeCompleto.text = usuario.nomeCompleto
+    }
+
+    private fun configuraRadioGroup() {
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.radioButtonCartaoCredito -> {

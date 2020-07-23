@@ -1,5 +1,6 @@
 package br.com.dio.picpayclone.di
 
+import br.com.dio.picpayclone.ui.ajuste.AjusteViewModel
 import br.com.dio.picpayclone.ui.home.HomeViewModel
 import br.com.dio.picpayclone.ui.login.LoginViewModel
 import br.com.dio.picpayclone.ui.pagar.PagarViewModel
@@ -10,4 +11,5 @@ val viewModelModule = module {
     viewModel { HomeViewModel() }
     viewModel { LoginViewModel() }
     viewModel { PagarViewModel() }
+    viewModel { AjusteViewModel() }
 }
