@@ -10,9 +10,9 @@ import androidx.navigation.fragment.findNavController
 import br.com.dio.picpayclone.Componentes
 import br.com.dio.picpayclone.ComponentesViewModel
 import br.com.dio.picpayclone.R
-import br.com.dio.picpayclone.data.Transacao
+import br.com.dio.picpayclone.data.Transferencia
+import br.com.dio.picpayclone.data.UsuarioLogado
 import br.com.dio.picpayclone.extension.formatarMoeda
-import br.com.dio.picpayclone.ui.login.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -21,7 +21,6 @@ class HomeFragment : Fragment() {
 
     private val componentesViewModel: ComponentesViewModel by sharedViewModel()
     private val homeViewModel: HomeViewModel by viewModel()
-    private val loginViewModel: LoginViewModel by viewModel()
     private val controlador by lazy { findNavController() }
 
     override fun onCreateView(
@@ -34,10 +33,10 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (loginViewModel.isUsuarioNaoLogado()) {
+        if (UsuarioLogado.isUsuarioNaoLogado()) {
             val direcao = HomeFragmentDirections.actionGlobalNavigationLogin()
             controlador.navigate(direcao)
-            return;
+            return
         }
     }
 
@@ -45,11 +44,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         componentesViewModel.temComponentes = Componentes(bottomNavigation = true)
         observarSaldo()
-        configuraRecyclerView()
+//        configuraRecyclerView()
     }
 
     private fun configuraRecyclerView() {
-        val mockLista = listOf(Transacao("1", valor = 10.0), Transacao("2", valor = 20.0))
+        val mockLista = listOf(Transferencia("1", valor = 10.0), Transferencia("2", valor = 20.0))
         recyclerView.adapter = HomeAdapter(mockLista)
     }
 

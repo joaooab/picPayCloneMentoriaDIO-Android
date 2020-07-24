@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import br.com.dio.picpayclone.Componentes
 import br.com.dio.picpayclone.ComponentesViewModel
@@ -31,15 +32,17 @@ class PagarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         componentesViewModel.temComponentes = Componentes(bottomNavigation = true)
-        configuraRecyclerView()
+        observarContatos()
     }
 
-    private fun configuraRecyclerView() {
-        val list = listOf(
-            Usuario("joaoovitor", "123", "joao@gmail", "Joao Vitor Freitas"),
-            Usuario("cicerobuild", "123", "cicero@gmail", "Cicero Build")
-        )
-        recyclerView.adapter = PagarAdapter(list) {
+    private fun observarContatos() {
+        pagarViewModel.contatos.observe(viewLifecycleOwner, Observer {
+            configuraRecyclerView(it)
+        })
+    }
+
+    private fun configuraRecyclerView(usuarios: List<Usuario>) {
+        recyclerView.adapter = PagarAdapter(usuarios) {
             val direcao = PagarFragmentDirections.actionNavigationPagarToNavigationTransferencia(it)
             controlador.navigate(direcao)
         }

@@ -18,13 +18,12 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/white"
             android:hint="Usuário"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
-            android:textColorLink="@android:color/white" />
+            android:text="joaovf"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -42,8 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/white"
-            android:hint="Senha"
-            android:textColor="@android:color/white" />
+            android:hint="Senha" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -62,24 +60,6 @@
         android:backgroundTint="@android:color/white"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
         app:strokeColor="@android:color/white" />
-
-    <!--    <com.google.android.material.button.MaterialButton-->
-    <!--        android:id="@+id/btn_check"-->
-    <!--        style="?attr/materialButtonOutlinedStyle"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="8dp"-->
-    <!--        android:layout_marginTop="8dp"-->
-    <!--        android:layout_marginBottom="16dp"-->
-    <!--        android:paddingStart="5dp"-->
-    <!--        android:paddingEnd="5dp"-->
-    <!--        android:textSize="12sp"-->
-    <!--        app:cornerRadius="8dp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/txv_description"-->
-    <!--        app:strokeColor="@color/colorPrimary"-->
-    <!--        tools:text="checar curriculo" />-->
 
     <ImageView
         android:id="@+id/imageView"

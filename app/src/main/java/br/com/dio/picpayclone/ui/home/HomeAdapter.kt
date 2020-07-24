@@ -5,12 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.dio.picpayclone.R
-import br.com.dio.picpayclone.data.Transacao
+import br.com.dio.picpayclone.data.Transferencia
 import br.com.dio.picpayclone.extension.formatarMoeda
 import br.com.dio.picpayclone.extension.formatar
 import kotlinx.android.synthetic.main.item_transacao.view.*
 
-class HomeAdapter(val transacoes: List<Transacao>) :
+class HomeAdapter(val transacoes: List<Transferencia>) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,13 +32,13 @@ class HomeAdapter(val transacoes: List<Transacao>) :
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(transacao: Transacao) {
+        fun bind(transferencia: Transferencia) {
             with(itemView) {
-                textViewOrigem.text = transacao.origem.nomeCompleto
-                textViewDestino.text = transacao.destino.nomeCompleto
-                textViewValor.text = transacao.valor.formatarMoeda()
-                textViewData.text = transacao.dataHora.formatar()
-                textViewCirculo.text = transacao.origem.nomeCompleto.first().toUpperCase().toString()
+                textViewOrigem.text = transferencia.origem.nomeCompleto
+                textViewDestino.text = transferencia.destino.nomeCompleto
+                textViewValor.text = transferencia.valor.formatarMoeda()
+                textViewData.text = transferencia.dataHora
+                textViewCirculo.text = transferencia.origem.nomeCompleto.first().toUpperCase().toString()
             }
         }
     }

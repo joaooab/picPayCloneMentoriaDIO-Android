@@ -4,6 +4,8 @@ object UsuarioLogado {
 
     var usuario: Usuario? = null
 
-    fun isUsuarioLogado() = usuario !== null
+    fun isUsuarioLogado() = usuario != null
+
+    fun isUsuarioNaoLogado() = !isUsuarioLogado()
 
 }
