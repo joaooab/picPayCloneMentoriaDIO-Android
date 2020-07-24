@@ -135,32 +135,24 @@
                 android:hint="Nome do titular" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--        <com.google.android.material.textfield.TextInputLayout-->
-        <!--            android:id="@+id/textInputLayoutVencimento"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="16dp"-->
-        <!--            android:layout_marginEnd="8dp"-->
-        <!--            app:layout_constraintEnd_toStartOf="@+id/textInputLayoutCVV"-->
-        <!--            app:layout_constraintStart_toStartOf="@+id/textInputLayoutNomeTitular"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNomeTitular">-->
-
-        <br.com.dio.picpayclone.ui.componente.EditTextDatePicker
-            android:id="@+id/editTextVencimento"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutVencimento"
             android:layout_width="0dp"
-            android:layout_height="65dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:background="@color/cinza"
-            android:hint="Vencimento"
-            android:inputType="date"
-            android:paddingStart="16dp"
-            android:paddingEnd="8dp"
             app:layout_constraintEnd_toStartOf="@+id/textInputLayoutCVV"
             app:layout_constraintStart_toStartOf="@+id/textInputLayoutNomeTitular"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNomeTitular" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNomeTitular">
 
-        <!--        </com.google.android.material.textfield.TextInputLayout>-->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextVencimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Vencimento"
+                android:inputType="number"
+                android:maxLength="4" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutCVV"
@@ -169,7 +161,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayoutNomeTitular"
-            app:layout_constraintStart_toEndOf="@+id/editTextVencimento"
+            app:layout_constraintStart_toEndOf="@+id/textInputLayoutVencimento"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNomeTitular">
 
             <com.google.android.material.textfield.TextInputEditText

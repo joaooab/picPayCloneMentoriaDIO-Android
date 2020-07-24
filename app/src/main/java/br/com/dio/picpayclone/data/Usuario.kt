@@ -12,5 +12,5 @@ data class Usuario(
     val cpf: String = "",
     val dataNascimento: String = "",
     val numeroTelefone: String = "",
-    val saldo: Double = 0.0
+    var saldo: Double = 0.0
 ) : Parcelable

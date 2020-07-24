@@ -2,10 +2,14 @@ package br.com.dio.picpayclone.data
 
 object UsuarioLogado {
 
-    var usuario: Usuario? = null
+    lateinit var usuario: Usuario
 
-    fun isUsuarioLogado() = usuario != null
+    fun isUsuarioLogado() = this::usuario.isInitialized
 
     fun isUsuarioNaoLogado() = !isUsuarioLogado()
+
+    fun setSaldo(saldo: Double) {
+        usuario.saldo = saldo
+    }
 
 }

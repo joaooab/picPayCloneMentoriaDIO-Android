@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -44,12 +45,38 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         componentesViewModel.temComponentes = Componentes(bottomNavigation = true)
         observarSaldo()
-//        configuraRecyclerView()
+        observarTransferencias()
+        observarErroSaldo()
+        observarErroTransferencia()
     }
 
-    private fun configuraRecyclerView() {
-        val mockLista = listOf(Transferencia("1", valor = 10.0), Transferencia("2", valor = 20.0))
-        recyclerView.adapter = HomeAdapter(mockLista)
+    private fun observarErroTransferencia() {
+        homeViewModel.onErrorTransferencia.observe(viewLifecycleOwner, Observer {
+            it?.let { mensagem ->
+                configuraRecyclerView(mutableListOf())
+                Toast.makeText(this.context, mensagem, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun observarErroSaldo() {
+        homeViewModel.onErrorSaldo.observe(viewLifecycleOwner, Observer {
+            it?.let { mensagem ->
+                Toast.makeText(this.context, mensagem, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun observarTransferencias() {
+        homeViewModel.transferencias.observe(viewLifecycleOwner, Observer {
+            it?.let { transferencias ->
+                configuraRecyclerView(transferencias)
+            }
+        })
+    }
+
+    private fun configuraRecyclerView(transferencais: List<Transferencia>) {
+        recyclerView.adapter = HomeAdapter(transferencais)
     }
 
     private fun observarSaldo() {

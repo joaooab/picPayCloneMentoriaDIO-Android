@@ -16,7 +16,7 @@ class TransferenciaViewModel(private val apiService: ApiService) : ViewModel() {
     val onError = MutableLiveData<String>()
 
     fun realizaTransferencia(transferencia: Transferencia) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             try {
                 val transferenciaRealziada = apiService.realizarTransferencia(transferencia)
                 _transferencia.value = transferenciaRealziada

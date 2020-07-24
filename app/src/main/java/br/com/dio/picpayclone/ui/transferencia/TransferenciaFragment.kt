@@ -15,7 +15,6 @@ import br.com.dio.picpayclone.Componentes
 import br.com.dio.picpayclone.ComponentesViewModel
 import br.com.dio.picpayclone.R
 import br.com.dio.picpayclone.data.*
-import br.com.dio.picpayclone.extension.DATE_TIME_FORMAT_US
 import br.com.dio.picpayclone.extension.formatar
 import kotlinx.android.synthetic.main.fragment_transferencia.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -50,7 +49,9 @@ class TransferenciaFragment : Fragment() {
 
     private fun observarErro() {
         transferenciaViewModel.onError.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(this.context, it, Toast.LENGTH_SHORT).show()
+            it?.let { mensagem ->
+                Toast.makeText(this.context, mensagem, Toast.LENGTH_SHORT).show()
+            }
         })
     }
 
@@ -71,19 +72,35 @@ class TransferenciaFragment : Fragment() {
 
     private fun criarTransferencia(): Transferencia {
         val usuarioOrigem = UsuarioLogado.usuario
-            ?: throw  IllegalArgumentException("Usuario não está logado")
         val cartaoCredito = criarCartaoCredito(usuarioOrigem)
-        val dataHora = Calendar.getInstance().formatar(DATE_TIME_FORMAT_US)
-        val valor = editTextValor.text.toString().toDouble()
-        return Transferencia("", usuarioOrigem, usuario, dataHora, true, valor, cartaoCredito)
+        val dataHora = Calendar.getInstance().formatar()
+        val valor = getValor()
+        return Transferencia(
+            Transferencia.gerarHash(),
+            usuarioOrigem,
+            usuario,
+            dataHora,
+            true,
+            valor,
+            cartaoCredito
+        )
+    }
+
+    private fun getValor(): Double {
+        val valor = editTextValor.text.toString()
+        return if (valor.isEmpty()) {
+            0.0
+        } else {
+            valor.toDouble()
+        }
     }
 
     private fun criarCartaoCredito(usuarioOrigem: Usuario): CartaoCredito {
         val numeroCartao = editTextNumeroCartao.text.toString()
         val titular = editTextTitular.text.toString()
-        val dataExpiracao = editTextVencimento.getData()?.formatar() ?: ""
+        val dataExpiracao = editTextVencimento.text.toString()
         val cvv = editTextCVV.text.toString()
-        val cartaoCredito = CartaoCredito(
+        return CartaoCredito(
             BandeiraCartao.VISA,
             numeroCartao,
             titular,
@@ -92,7 +109,6 @@ class TransferenciaFragment : Fragment() {
             "",
             usuarioOrigem
         )
-        return cartaoCredito
     }
 
     private fun configuraDadosUsuario() {
