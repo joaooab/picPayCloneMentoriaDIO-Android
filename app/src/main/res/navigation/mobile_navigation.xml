@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_transferencia"
-        android:name="br.com.dio.picpayclone.ui.transferencia.TransferenciaFragment"
+        android:name="br.com.dio.picpayclone.ui.transacao.TransacaoFragment"
         android:label="Transferencia"
         tools:layout="@layout/fragment_transferencia" >
         <argument

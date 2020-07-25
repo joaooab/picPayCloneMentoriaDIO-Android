@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import br.com.dio.picpayclone.Componentes
 import br.com.dio.picpayclone.ComponentesViewModel
 import br.com.dio.picpayclone.R
+import br.com.dio.picpayclone.data.UsuarioLogado
 import kotlinx.android.synthetic.main.fragment_ajuste.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -31,6 +32,17 @@ class AjusteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         componentesViewModel.temComponentes = Componentes(bottomNavigation = true)
         configuraBotaoSair()
+        configuraDadosUsuario()
+    }
+
+    private fun configuraDadosUsuario() {
+        UsuarioLogado.usuario.let { usuario ->
+            textViewLoginPrincipal.text = usuario.login
+            textViewNomeCompleto.text = usuario.nomeCompleto
+            textViewLogin.text = usuario.login
+            textViewEmail.text = usuario.email
+            textViewNumero.text = usuario.numeroTelefone
+        }
     }
 
     private fun configuraBotaoSair() {

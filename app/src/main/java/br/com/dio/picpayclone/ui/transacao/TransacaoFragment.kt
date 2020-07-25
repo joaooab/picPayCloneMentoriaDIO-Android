@@ -1,4 +1,4 @@
-package br.com.dio.picpayclone.ui.transferencia
+package br.com.dio.picpayclone.ui.transacao
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,11 +21,11 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
-class TransferenciaFragment : Fragment() {
+class TransacaoFragment : Fragment() {
 
     private val componentesViewModel: ComponentesViewModel by sharedViewModel()
-    private val transferenciaViewModel: TransferenciaViewModel by viewModel()
-    private val argumentos by navArgs<TransferenciaFragmentArgs>()
+    private val transacaoViewModel: TransacaoViewModel by viewModel()
+    private val argumentos by navArgs<TransacaoFragmentArgs>()
     private val usuario by lazy { argumentos.usuario }
     private val controlador by lazy { findNavController() }
 
@@ -48,7 +48,7 @@ class TransferenciaFragment : Fragment() {
     }
 
     private fun observarErro() {
-        transferenciaViewModel.onError.observe(viewLifecycleOwner, Observer {
+        transacaoViewModel.onError.observe(viewLifecycleOwner, Observer {
             it?.let { mensagem ->
                 Toast.makeText(this.context, mensagem, Toast.LENGTH_SHORT).show()
             }
@@ -56,9 +56,9 @@ class TransferenciaFragment : Fragment() {
     }
 
     private fun observarTransferencia() {
-        transferenciaViewModel.transferencia.observe(viewLifecycleOwner, Observer {
+        transacaoViewModel.transacao.observe(viewLifecycleOwner, Observer {
             val direcao =
-                TransferenciaFragmentDirections.actionNavigationTransferenciaToNavigationPagar()
+                TransacaoFragmentDirections.actionNavigationTransferenciaToNavigationPagar()
             controlador.navigate(direcao)
         })
     }
@@ -66,21 +66,22 @@ class TransferenciaFragment : Fragment() {
     private fun configuraBotaoTransferir() {
         buttonTransferir.setOnClickListener {
             val transferencia = criarTransferencia()
-            transferenciaViewModel.realizaTransferencia(transferencia)
+            transacaoViewModel.realizaTransferencia(transferencia)
         }
     }
 
-    private fun criarTransferencia(): Transferencia {
+    private fun criarTransferencia(): Transacao {
         val usuarioOrigem = UsuarioLogado.usuario
         val cartaoCredito = criarCartaoCredito(usuarioOrigem)
         val dataHora = Calendar.getInstance().formatar()
+        val isCartaoCredito = radioButtonCartaoCredito.isChecked
         val valor = getValor()
-        return Transferencia(
-            Transferencia.gerarHash(),
+        return Transacao(
+            Transacao.gerarHash(),
             usuarioOrigem,
             usuario,
             dataHora,
-            true,
+            isCartaoCredito,
             valor,
             cartaoCredito
         )

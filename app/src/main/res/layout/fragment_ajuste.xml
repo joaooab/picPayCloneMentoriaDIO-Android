@@ -20,17 +20,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNomeCompleto"
         app:layout_constraintVertical_bias="0.0">
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/textViewNumero"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -50,7 +50,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/textViewLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -67,7 +67,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView7" />
+            app:layout_constraintTop_toBottomOf="@id/textViewLogin" />
 
         <View
             android:id="@+id/view2"
@@ -78,7 +78,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewNumero" />
 
         <View
             android:id="@+id/view3"
@@ -89,7 +89,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
 
         <View
             android:id="@+id/view4"
@@ -99,7 +99,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="280dp" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonSair" />
 
         <TextView
             android:id="@+id/textView8"
@@ -124,14 +124,13 @@
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/textViewEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/textView10"
             tools:text="joaoo@gmail.com" />
-
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonSair"
@@ -140,6 +139,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/white"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:text="Sair"
             android:textAlignment="textStart"
             android:textColor="@android:color/holo_red_dark"
@@ -151,7 +151,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textViewLoginPrincipal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
@@ -161,13 +161,13 @@
         tools:text="\@joaovitorfreitas" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textViewNomeCompleto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewLoginPrincipal"
+        app:layout_constraintStart_toStartOf="@+id/textViewLoginPrincipal"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLoginPrincipal"
         tools:text="João Vitor Freitas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package br.com.dio.picpayclone.services
 
-import br.com.dio.picpayclone.data.Transferencia
+import br.com.dio.picpayclone.data.PageTransacao
+import br.com.dio.picpayclone.data.Transacao
 import br.com.dio.picpayclone.data.Usuario
 import retrofit2.http.*
 
@@ -16,9 +17,9 @@ interface ApiService {
     suspend fun getSaldo(@Path("login") login: String): Usuario
 
     @POST("/transacoes")
-    suspend fun realizarTransferencia(@Body transferencia: Transferencia): Transferencia
+    suspend fun realizarTransacao(@Body transacao: Transacao): Transacao
 
     @GET("/transacoes")
-    suspend fun getTransferencias(@Query("login") login: String): List<Transferencia>
+    suspend fun getTransacoes(@Query("login") login: String): PageTransacao
 
 }
