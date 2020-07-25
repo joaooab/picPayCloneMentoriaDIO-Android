@@ -13,16 +13,19 @@ class PagarViewModel(private val apiService: ApiService) : ViewModel() {
 
     private val _contatos = MutableLiveData<List<Usuario>>()
     val contatos: LiveData<List<Usuario>> = _contatos
+    val onLoading = MutableLiveData<Boolean>()
     val onError = MutableLiveData<String>()
 
     init {
         viewModelScope.launch {
+            onLoading.value = true
             try {
                 val usuarios = apiService.getTodosUsuarios(UsuarioLogado.usuario.login)
                 _contatos.value = usuarios
             } catch (e: Exception) {
                 onError.value = e.message
             }
+            onLoading.value = false
         }
     }
 

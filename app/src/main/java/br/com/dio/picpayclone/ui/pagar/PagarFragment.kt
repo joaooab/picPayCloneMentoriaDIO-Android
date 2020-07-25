@@ -33,6 +33,19 @@ class PagarFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         componentesViewModel.temComponentes = Componentes(bottomNavigation = true)
         observarContatos()
+        observarLoading()
+    }
+
+    private fun observarLoading() {
+        pagarViewModel.onLoading.observe(viewLifecycleOwner, Observer { onLoading ->
+            if (onLoading) {
+                progressBarPagar.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+            } else {
+                progressBarPagar.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
+            }
+        })
     }
 
     private fun observarContatos() {
