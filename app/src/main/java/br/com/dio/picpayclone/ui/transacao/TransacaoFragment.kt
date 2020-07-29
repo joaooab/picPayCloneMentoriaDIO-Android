@@ -72,10 +72,38 @@ class TransacaoFragment : Fragment() {
 
     private fun criarTransferencia(): Transacao {
         val usuarioOrigem = UsuarioLogado.usuario
-        val cartaoCredito = criarCartaoCredito(usuarioOrigem)
-        val dataHora = Calendar.getInstance().formatar()
         val isCartaoCredito = radioButtonCartaoCredito.isChecked
+        val dataHora = Calendar.getInstance().formatar()
         val valor = getValor()
+        return if (isCartaoCredito) {
+            criarTransacaoComCartaoCredito(usuarioOrigem, dataHora, isCartaoCredito, valor)
+        } else {
+            criarTransacaoSemCartaoCredito(usuarioOrigem, dataHora, isCartaoCredito, valor)
+        }
+    }
+
+    private fun criarTransacaoSemCartaoCredito(
+        usuarioOrigem: Usuario,
+        dataHora: String,
+        isCartaoCredito: Boolean,
+        valor: Double
+    ): Transacao {
+        return Transacao(
+            Transacao.gerarHash(),
+            usuarioOrigem,
+            usuario,
+            dataHora,
+            isCartaoCredito,
+            valor
+        )
+    }
+
+    private fun criarTransacaoComCartaoCredito(
+        usuarioOrigem: Usuario,
+        dataHora: String,
+        isCartaoCredito: Boolean,
+        valor: Double
+    ): Transacao {
         return Transacao(
             Transacao.gerarHash(),
             usuarioOrigem,
@@ -83,7 +111,7 @@ class TransacaoFragment : Fragment() {
             dataHora,
             isCartaoCredito,
             valor,
-            cartaoCredito
+            criarCartaoCredito(usuarioOrigem)
         )
     }
 

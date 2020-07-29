@@ -132,7 +132,9 @@
                 android:id="@+id/editTextTitular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nome do titular" />
+                android:hint="Nome do titular"
+                android:lines="1"
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
