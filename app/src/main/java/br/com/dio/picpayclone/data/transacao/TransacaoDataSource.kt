@@ -15,6 +15,10 @@ class TransacaoDataSource(
     private val onError: MutableLiveData<String>
 ) : PageKeyedDataSource<Int, Transacao>() {
 
+    companion object {
+        const val PAGE_SIZE = 5
+    }
+
     override fun loadInitial(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, Transacao>
@@ -22,7 +26,7 @@ class TransacaoDataSource(
         scope.launch {
             onLoading.value = true
             try {
-                val transacoes = apiService.getTransacoes(login, 0)
+                val transacoes = apiService.getTransacoes(login, 0, PAGE_SIZE)
                 callback.onResult(transacoes.content, null, 1)
             } catch (e: Exception) {
                 onError.value = e.message
@@ -35,7 +39,7 @@ class TransacaoDataSource(
         scope.launch {
             try {
                 val page = params.key
-                val transacoes = apiService.getTransacoes(login, page)
+                val transacoes = apiService.getTransacoes(login, page, PAGE_SIZE)
                 callback.onResult(transacoes.content, page.plus(1))
             } catch (e: Exception) {
                 onError.value = e.message

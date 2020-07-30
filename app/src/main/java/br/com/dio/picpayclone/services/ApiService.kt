@@ -22,7 +22,8 @@ interface ApiService {
     @GET("/transacoes")
     suspend fun getTransacoes(
         @Query("login") login: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("size") size: Int
     ): TransacaoPage
 
 }

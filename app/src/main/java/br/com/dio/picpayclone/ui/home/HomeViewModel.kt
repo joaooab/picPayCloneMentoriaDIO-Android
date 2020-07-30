@@ -37,7 +37,7 @@ class HomeViewModel(private val apiService: ApiService) : ViewModel() {
 
     private fun configurarPaginacao(): PagedList.Config {
         return PagedList.Config.Builder()
-            .setPageSize(20)
+            .setPageSize(TransacaoDataSource.PAGE_SIZE)
             .setEnablePlaceholders(false)
             .build()
     }
