@@ -1,5 +1,7 @@
-package br.com.dio.picpayclone.data
+package br.com.dio.picpayclone.data.transacao
 
+import br.com.dio.picpayclone.data.CartaoCredito
+import br.com.dio.picpayclone.data.Usuario
 import java.util.*
 
 data class Transacao(

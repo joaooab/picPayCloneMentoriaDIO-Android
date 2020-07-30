@@ -1,7 +1,7 @@
 package br.com.dio.picpayclone.services
 
-import br.com.dio.picpayclone.data.PageTransacao
-import br.com.dio.picpayclone.data.Transacao
+import br.com.dio.picpayclone.data.transacao.TransacaoPage
+import br.com.dio.picpayclone.data.transacao.Transacao
 import br.com.dio.picpayclone.data.Usuario
 import retrofit2.http.*
 
@@ -20,6 +20,9 @@ interface ApiService {
     suspend fun realizarTransacao(@Body transacao: Transacao): Transacao
 
     @GET("/transacoes")
-    suspend fun getTransacoes(@Query("login") login: String): PageTransacao
+    suspend fun getTransacoes(
+        @Query("login") login: String,
+        @Query("page") page: Int
+    ): TransacaoPage
 
 }

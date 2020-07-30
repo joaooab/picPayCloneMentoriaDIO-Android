@@ -1,6 +1,9 @@
-package br.com.dio.picpayclone.data
+package br.com.dio.picpayclone.data.transacao
 
-data class PageTransacao(
+import br.com.dio.picpayclone.data.Pageable
+import br.com.dio.picpayclone.data.Sort
+
+data class TransacaoPage(
     val content: List<Transacao>,
     val empty: Boolean,
     val first: Boolean,

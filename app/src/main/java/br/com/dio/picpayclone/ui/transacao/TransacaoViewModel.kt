@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.dio.picpayclone.data.Transacao
+import br.com.dio.picpayclone.data.transacao.Transacao
 import br.com.dio.picpayclone.services.ApiService
 import kotlinx.coroutines.launch
 

@@ -15,6 +15,7 @@ import br.com.dio.picpayclone.Componentes
 import br.com.dio.picpayclone.ComponentesViewModel
 import br.com.dio.picpayclone.R
 import br.com.dio.picpayclone.data.*
+import br.com.dio.picpayclone.data.transacao.Transacao
 import br.com.dio.picpayclone.extension.formatar
 import kotlinx.android.synthetic.main.fragment_transferencia.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel

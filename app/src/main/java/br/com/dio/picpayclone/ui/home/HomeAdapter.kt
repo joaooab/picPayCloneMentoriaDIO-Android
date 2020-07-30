@@ -1,16 +1,17 @@
 package br.com.dio.picpayclone.ui.home
 
+import TransacaoDiffUtilCallBack
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.dio.picpayclone.R
-import br.com.dio.picpayclone.data.Transacao
+import br.com.dio.picpayclone.data.transacao.Transacao
 import br.com.dio.picpayclone.extension.formatarMoeda
 import kotlinx.android.synthetic.main.item_transacao.view.*
 
-class HomeAdapter(val transacoes: List<Transacao>) :
-    RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter : PagedListAdapter<Transacao, HomeAdapter.ViewHolder>(TransacaoDiffUtilCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -22,11 +23,11 @@ class HomeAdapter(val transacoes: List<Transacao>) :
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = transacoes.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val transacao = transacoes[position]
-        holder.bind(transacao)
+        val transacao = getItem(position)
+        transacao?.let {
+            holder.bind(it)
+        }
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

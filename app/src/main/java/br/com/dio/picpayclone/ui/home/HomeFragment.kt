@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import br.com.dio.picpayclone.Componentes
 import br.com.dio.picpayclone.ComponentesViewModel
 import br.com.dio.picpayclone.R
-import br.com.dio.picpayclone.data.Transacao
 import br.com.dio.picpayclone.data.UsuarioLogado
 import br.com.dio.picpayclone.extension.formatarMoeda
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -25,6 +24,7 @@ class HomeFragment : Fragment() {
     private val componentesViewModel: ComponentesViewModel by sharedViewModel()
     private val homeViewModel: HomeViewModel by viewModel()
     private val controlador by lazy { findNavController() }
+    private val adapter = HomeAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,23 +34,20 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         if (UsuarioLogado.isUsuarioNaoLogado()) {
             val direcao = HomeFragmentDirections.actionGlobalNavigationLogin()
             controlador.navigate(direcao)
             return
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         componentesViewModel.temComponentes = Componentes(bottomNavigation = true)
         observarSaldo()
         observarTransferencias()
         observarErroSaldo()
         observarErroTransferencia()
         observarLoading()
+        configuraRecyclerView()
     }
 
     private fun observarLoading() {
@@ -68,7 +65,6 @@ class HomeFragment : Fragment() {
     private fun observarErroTransferencia() {
         homeViewModel.onErrorTransferencia.observe(viewLifecycleOwner, Observer {
             it?.let { mensagem ->
-                configuraRecyclerView(mutableListOf())
                 Toast.makeText(this.context, mensagem, Toast.LENGTH_SHORT).show()
             }
         })
@@ -83,15 +79,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun observarTransferencias() {
-        homeViewModel.transferencias.observe(viewLifecycleOwner, Observer {
+        homeViewModel.getTransferencias().observe(viewLifecycleOwner, Observer {
             it?.let { transferencias ->
-                configuraRecyclerView(transferencias)
+                adapter.submitList(transferencias)
             }
         })
     }
 
-    private fun configuraRecyclerView(transferencais: List<Transacao>) {
-        recyclerView.adapter = HomeAdapter(transferencais)
+    private fun configuraRecyclerView() {
+        recyclerView.adapter = adapter
     }
 
     private fun observarSaldo() {
