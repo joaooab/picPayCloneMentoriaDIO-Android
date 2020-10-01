@@ -20,14 +20,12 @@ class HomeViewModel(private val apiService: ApiService) : ViewModel() {
     val onErrorTransferencia = MutableLiveData<String>()
 
     init {
-        if (UsuarioLogado.isUsuarioLogado()) {
-            onLoading.value = true
-            viewModelScope.launch {
-                val login = UsuarioLogado.usuario.login
-                obterSaldo(login)
-                obterHistorico(login)
-                onLoading.value = false
-            }
+        onLoading.value = true
+        viewModelScope.launch {
+            val login = UsuarioLogado.usuario.login
+            obterSaldo(login)
+            obterHistorico(login)
+            onLoading.value = false
         }
     }
 

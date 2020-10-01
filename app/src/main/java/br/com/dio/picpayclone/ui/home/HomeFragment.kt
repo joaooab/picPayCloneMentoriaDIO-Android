@@ -34,15 +34,6 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (UsuarioLogado.isUsuarioNaoLogado()) {
-            val direcao = HomeFragmentDirections.actionGlobalNavigationLogin()
-            controlador.navigate(direcao)
-            return
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         componentesViewModel.temComponentes = Componentes(bottomNavigation = true)
