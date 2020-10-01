@@ -12,6 +12,6 @@ object RetrofitService {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-     inline fun <reified T> create() = service.create(T::class.java)
+    inline fun <reified T> create() = service.create(T::class.java)
 
 }
