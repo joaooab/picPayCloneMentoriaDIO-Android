@@ -9,7 +9,7 @@ import br.com.dio.picpayclone.data.Transacao
 import br.com.dio.picpayclone.extension.formatarMoeda
 import kotlinx.android.synthetic.main.item_transacao.view.*
 
-class HomeAdapter(val transacoes: List<Transacao>) :
+class HomeAdapter(private val transacoes: List<Transacao> = listOf()) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,7 +37,8 @@ class HomeAdapter(val transacoes: List<Transacao>) :
                 textViewDestino.text = transacao.destino.nomeCompleto
                 textViewValor.text = transacao.valor.formatarMoeda()
                 textViewData.text = transacao.dataHora
-                textViewCirculo.text = transacao.origem.nomeCompleto.first().toUpperCase().toString()
+                textViewCirculo.text =
+                    transacao.origem.nomeCompleto.first().toUpperCase().toString()
             }
         }
     }
