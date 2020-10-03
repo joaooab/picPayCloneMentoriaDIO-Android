@@ -2,19 +2,16 @@ package br.com.dio.picpayclone.data
 
 object UsuarioLogado {
 
-    val usuario = Usuario(
-        "joaovf",
-        "123456",
-        "joaofreitas@gmail.com",
-        "João Vitor Freitas",
-        "62992920466",
-        "1980-06-20",
-        "62992920466",
-        0.0
-    )
+    lateinit var token: Token
+
+    lateinit var usuario: Usuario
 
     fun setSaldo(saldo: Double) {
         usuario.saldo = saldo
     }
+
+    fun isLogado(): Boolean = this::token.isInitialized
+
+    fun isNaoLogado(): Boolean = !isLogado()
 
 }

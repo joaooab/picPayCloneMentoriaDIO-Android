@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -15,7 +15,7 @@
         android:id="@+id/navigation_pagar"
         android:name="br.com.dio.picpayclone.ui.pagar.PagarFragment"
         android:label="@string/title_pagar"
-        tools:layout="@layout/fragment_pagar" >
+        tools:layout="@layout/fragment_pagar">
         <action
             android:id="@+id/action_navigation_pagar_to_navigation_transferencia"
             app:destination="@id/navigation_transferencia"
@@ -33,7 +33,7 @@
         android:id="@+id/navigation_transferencia"
         android:name="br.com.dio.picpayclone.ui.transacao.TransacaoFragment"
         android:label="Transferencia"
-        tools:layout="@layout/fragment_transferencia" >
+        tools:layout="@layout/fragment_transferencia">
         <argument
             android:name="usuario"
             app:argType="br.com.dio.picpayclone.data.Usuario" />
@@ -43,4 +43,20 @@
             app:popUpTo="@id/navigation_pagar"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="br.com.dio.picpayclone.ui.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:destination="@id/loginFragment"
+        app:popUpTo="@id/mobile_navigation"
+        app:popUpToInclusive="true" />
 </navigation>

@@ -1,11 +1,12 @@
 package br.com.dio.picpayclone.services
 
-import br.com.dio.picpayclone.data.PageTransacao
-import br.com.dio.picpayclone.data.Transacao
-import br.com.dio.picpayclone.data.Usuario
+import br.com.dio.picpayclone.data.*
 import retrofit2.http.*
 
 interface ApiService {
+
+    @POST("/autenticacao")
+    suspend fun autenticar(@Body login: Login): Token
 
     @GET("/usuarios/contatos")
     suspend fun getTodosUsuarios(@Query("login") login: String): List<Usuario>
