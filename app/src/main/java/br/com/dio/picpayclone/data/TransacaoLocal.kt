@@ -1,9 +1,12 @@
 package br.com.dio.picpayclone.data
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "transacao")
 data class TransacaoLocal(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
     val codigo: String = "",
     val origem: String = "",
     val destino: String = "",

@@ -1,6 +1,7 @@
 package br.com.dio.picpayclone
 
 import android.app.Application
+import br.com.dio.picpayclone.di.daoModule
 import br.com.dio.picpayclone.di.repositoryModule
 import br.com.dio.picpayclone.di.serviceModule
 import br.com.dio.picpayclone.di.viewModelModule
@@ -13,7 +14,7 @@ class AppApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@AppApplication)
-            modules(viewModelModule, serviceModule, repositoryModule)
+            modules(viewModelModule, serviceModule, repositoryModule, daoModule)
         }
     }
 }

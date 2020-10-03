@@ -10,6 +10,7 @@ import br.com.dio.picpayclone.ui.home.HomeViewModel
 import br.com.dio.picpayclone.ui.login.LoginViewModel
 import br.com.dio.picpayclone.ui.pagar.PagarViewModel
 import br.com.dio.picpayclone.ui.transacao.TransacaoViewModel
+import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -27,5 +28,9 @@ val serviceModule = module {
 }
 
 val repositoryModule = module {
-    single<TransacaoRepository> { TransacaoRepositoryImpl(get()) }
+    single<TransacaoRepository> { TransacaoRepositoryImpl(get(), get()) }
+}
+
+val daoModule = module {
+    single { AppDatabase.getInstance(androidContext()).transacaoDAO() }
 }

@@ -4,14 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import br.com.dio.picpayclone.data.TransacaoDAO
+import br.com.dio.picpayclone.data.TransacaoLocal
 
 
 @Database(
-    version = 4,
-    entities = [],
+    version = 1,
+    entities = [TransacaoLocal::class],
     exportSchema = false
 )
-abstract class AppDatabase: RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
+
+    abstract fun transacaoDAO(): TransacaoDAO
 
     companion object {
         private const val NOME_BANCO_DE_DADOS = "picpayclone.db"

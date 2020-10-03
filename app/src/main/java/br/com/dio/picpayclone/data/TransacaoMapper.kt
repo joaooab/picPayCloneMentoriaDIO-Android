@@ -11,3 +11,15 @@ fun TransacaoNetwork.toModel(): Transacao = Transacao(
 )
 
 fun List<TransacaoNetwork>.toModel() = this.map { it.toModel() }
+
+
+fun Transacao.toLocal(): TransacaoLocal = TransacaoLocal(
+    codigo = codigo,
+    origem = origem.login,
+    destino = destino.login,
+    dataHora = dataHora,
+    isCartaoCredito = isCartaoCredito,
+    valor = valor
+)
+
+fun List<Transacao>.toLocal() = this.map { it.toLocal() }
