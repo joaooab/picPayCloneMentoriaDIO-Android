@@ -3,8 +3,7 @@ package br.com.dio.picpayclone.ui.home
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -14,7 +13,6 @@ import br.com.dio.picpayclone.Componentes
 import br.com.dio.picpayclone.ComponentesViewModel
 import br.com.dio.picpayclone.R
 import br.com.dio.picpayclone.data.Transacao
-import br.com.dio.picpayclone.data.UsuarioLogado
 import br.com.dio.picpayclone.extension.formatarMoeda
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -41,16 +39,31 @@ class HomeFragment : Fragment() {
         observarTransferencias()
         observarErroSaldo()
         observarErroTransferencia()
-        observarLoading()
+        observarLoadingSaldo()
+        observarLoadingTransferencia()
     }
 
-    private fun observarLoading() {
-        homeViewModel.onLoading.observe(viewLifecycleOwner, Observer { onLoading ->
+    private fun observarLoadingSaldo() {
+        homeViewModel.onLoadingSaldo.observe(viewLifecycleOwner, Observer { onLoading ->
             if (onLoading) {
-                progressBar.visibility = VISIBLE
+                progressBarSaldo.visibility = VISIBLE
+                textViewSaldo.visibility = INVISIBLE
+                textViewLabelSaldo.visibility = INVISIBLE
+            } else {
+                progressBarSaldo.visibility = GONE
+                textViewSaldo.visibility = VISIBLE
+                textViewLabelSaldo.visibility = VISIBLE
+            }
+        })
+    }
+
+    private fun observarLoadingTransferencia() {
+        homeViewModel.onLoadingTransferencia.observe(viewLifecycleOwner, Observer { onLoading ->
+            if (onLoading) {
+                progressBarTransferencia.visibility = VISIBLE
                 recyclerView.visibility = GONE
             } else {
-                progressBar.visibility = GONE
+                progressBarTransferencia.visibility = GONE
                 recyclerView.visibility = VISIBLE
             }
         })

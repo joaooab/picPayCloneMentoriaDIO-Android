@@ -15,36 +15,41 @@ class HomeViewModel(private val apiService: ApiService) : ViewModel() {
     val saldo: LiveData<Double> = _saldo
     private val _transferencias = MutableLiveData<List<Transacao>>()
     val transferencias: LiveData<List<Transacao>> = _transferencias
-    val onLoading = MutableLiveData<Boolean>()
+    val onLoadingSaldo = MutableLiveData<Boolean>()
     val onErrorSaldo = MutableLiveData<String>()
+    val onLoadingTransferencia = MutableLiveData<Boolean>()
     val onErrorTransferencia = MutableLiveData<String>()
 
     init {
-        onLoading.value = true
+        val login = UsuarioLogado.usuario.login
+        obterSaldo(login)
+        obterHistorico(login)
+    }
+
+    private fun obterHistorico(login: String) {
+        onLoadingTransferencia.value = true
         viewModelScope.launch {
-            val login = UsuarioLogado.usuario.login
-            obterSaldo(login)
-            obterHistorico(login)
-            onLoading.value = false
+            try {
+                val historico = apiService.getTransacoes(login)
+                _transferencias.value = historico.content
+            } catch (e: Exception) {
+                onErrorTransferencia.value = e.message
+            }
+            onLoadingTransferencia.value = false
         }
     }
 
-    private suspend fun obterHistorico(login: String) {
-        try {
-            val historico = apiService.getTransacoes(login)
-            _transferencias.value = historico.content
-        } catch (e: Exception) {
-            onErrorTransferencia.value = e.message
-        }
-    }
-
-    private suspend fun obterSaldo(login: String) {
-        try {
-            val novoSaldo = apiService.getSaldo(login).saldo
-            UsuarioLogado.setSaldo(novoSaldo)
-            _saldo.value = novoSaldo
-        } catch (e: Exception) {
-            onErrorSaldo.value = e.message
+    private fun obterSaldo(login: String) {
+        onLoadingSaldo.value = true
+        viewModelScope.launch {
+            try {
+                val novoSaldo = apiService.getSaldo(login).saldo
+                UsuarioLogado.setSaldo(novoSaldo)
+                _saldo.value = novoSaldo
+            } catch (e: Exception) {
+                onErrorSaldo.value = e.message
+            }
+            onLoadingSaldo.value = false
         }
     }
 
