@@ -47,8 +47,7 @@ class AjusteFragment : Fragment() {
 
     private fun configuraBotaoSair() {
         buttonSair.setOnClickListener {
-            val direcao = AjusteFragmentDirections.actionGlobalNavigationLogin()
-            controlador.navigate(direcao)
+
         }
     }
 }
