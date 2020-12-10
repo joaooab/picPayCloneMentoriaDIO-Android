@@ -1,5 +1,5 @@
 
-APP que simular funcionalidades do PicPay para mentoria de Android + Jetpack com Kotlin da Digital Inovation One (https://digitalinnovation.one/).
+APP que simula funcionalidades do PicPay para mentoria de Android + Jetpack com Kotlin da Digital Inovation One (https://digitalinnovation.one/).
 
 O app segue a arquitetura MVVM e apresenta as seguintes tecnologias:
 
