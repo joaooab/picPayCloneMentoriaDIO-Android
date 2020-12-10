@@ -1,7 +1,7 @@
 package br.com.dio.picpayclone.data
 
 data class PageTransacao(
-    val content: List<Transacao>,
+    val content: List<TransacaoNetwork>,
     val empty: Boolean,
     val first: Boolean,
     val last: Boolean,

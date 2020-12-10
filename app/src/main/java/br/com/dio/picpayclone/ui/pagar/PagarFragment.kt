@@ -11,6 +11,8 @@ import br.com.dio.picpayclone.Componentes
 import br.com.dio.picpayclone.ComponentesViewModel
 import br.com.dio.picpayclone.R
 import br.com.dio.picpayclone.data.Usuario
+import br.com.dio.picpayclone.extension.desaparecer
+import br.com.dio.picpayclone.extension.mostrar
 import kotlinx.android.synthetic.main.fragment_pagar.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -39,11 +41,11 @@ class PagarFragment : Fragment() {
     private fun observarLoading() {
         pagarViewModel.onLoading.observe(viewLifecycleOwner, Observer { onLoading ->
             if (onLoading) {
-                progressBarPagar.visibility = View.VISIBLE
-                recyclerView.visibility = View.GONE
+                progressBarPagar.mostrar()
+                recyclerView.desaparecer()
             } else {
-                progressBarPagar.visibility = View.GONE
-                recyclerView.visibility = View.VISIBLE
+                progressBarPagar.desaparecer()
+                recyclerView.mostrar()
             }
         })
     }

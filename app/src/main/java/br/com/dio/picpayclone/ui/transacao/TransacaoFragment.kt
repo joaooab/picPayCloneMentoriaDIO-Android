@@ -15,7 +15,9 @@ import br.com.dio.picpayclone.Componentes
 import br.com.dio.picpayclone.ComponentesViewModel
 import br.com.dio.picpayclone.R
 import br.com.dio.picpayclone.data.*
+import br.com.dio.picpayclone.extension.desaparecer
 import br.com.dio.picpayclone.extension.formatar
+import br.com.dio.picpayclone.extension.mostrar
 import kotlinx.android.synthetic.main.fragment_transferencia.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -149,10 +151,10 @@ class TransacaoFragment : Fragment() {
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.radioButtonCartaoCredito -> {
-                    constraintLayoutCartaoCredito.visibility = VISIBLE
+                    constraintLayoutCartaoCredito.mostrar()
                 }
                 else -> {
-                    constraintLayoutCartaoCredito.visibility = GONE
+                    constraintLayoutCartaoCredito.desaparecer()
                 }
             }
         }

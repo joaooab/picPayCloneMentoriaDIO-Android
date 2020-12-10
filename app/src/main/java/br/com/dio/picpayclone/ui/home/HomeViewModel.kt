@@ -1,24 +1,19 @@
 package br.com.dio.picpayclone.ui.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.dio.picpayclone.data.State
 import br.com.dio.picpayclone.data.Transacao
 import br.com.dio.picpayclone.data.UsuarioLogado
-import br.com.dio.picpayclone.services.ApiService
+import br.com.dio.picpayclone.repository.TransacaoRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val apiService: ApiService) : ViewModel() {
+class HomeViewModel(private val repository: TransacaoRepository) : ViewModel() {
 
-    private val _saldo = MutableLiveData(0.0)
-    val saldo: LiveData<Double> = _saldo
-    private val _transferencias = MutableLiveData<List<Transacao>>()
-    val transferencias: LiveData<List<Transacao>> = _transferencias
-    val onLoadingSaldo = MutableLiveData<Boolean>()
-    val onErrorSaldo = MutableLiveData<String>()
-    val onLoadingTransferencia = MutableLiveData<Boolean>()
-    val onErrorTransferencia = MutableLiveData<String>()
+    val saldoState = MutableLiveData<State<Double>>()
+    val transacaoState = MutableLiveData<State<List<Transacao>>>()
 
     init {
         val login = UsuarioLogado.usuario.login
@@ -27,29 +22,27 @@ class HomeViewModel(private val apiService: ApiService) : ViewModel() {
     }
 
     private fun obterHistorico(login: String) {
-        onLoadingTransferencia.value = true
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
+            transacaoState.postValue(State.Loading())
             try {
-                val historico = apiService.getTransacoes(login)
-                _transferencias.value = historico.content
+                val historico = repository.getTransacoes(login)
+                transacaoState.postValue(State.Success(historico))
             } catch (e: Exception) {
-                onErrorTransferencia.value = e.message
+                transacaoState.postValue(State.Error(e))
             }
-            onLoadingTransferencia.value = false
         }
     }
 
     private fun obterSaldo(login: String) {
-        onLoadingSaldo.value = true
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
+            saldoState.postValue(State.Loading())
             try {
-                val novoSaldo = apiService.getSaldo(login).saldo
+                val novoSaldo = repository.getSaldo(login).saldo
                 UsuarioLogado.setSaldo(novoSaldo)
-                _saldo.value = novoSaldo
+                saldoState.postValue(State.Success(novoSaldo))
             } catch (e: Exception) {
-                onErrorSaldo.value = e.message
+                saldoState.postValue(State.Error(e))
             }
-            onLoadingSaldo.value = false
         }
     }
 
